@@ -68,7 +68,9 @@ app.use(function *(next) {
   var gt = new Gettext();
   var locale = managerLocale.replace('-', '_');
   var moFile = `config/locales/${locale}.mo`;
-  moFile = fs.existsSync(moFile) ? moFile : 'config/locales/en_US.mo';
+  this.state.currentLocale = managerLocale;
+  this.state.supportedLocales = ['de_DE', 'es_ES', 'en_US', 'fr_FR', 'pt_BR'];
+  moFile = -1 !== this.state.supportedLocales.indexOf(locale) ? moFile : 'config/locales/en_US.mo';
   var fileContents = require('fs').readFileSync(moFile);
   gt.addTextdomain(locale, fileContents);
 

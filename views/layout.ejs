@@ -33,10 +33,18 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/"><%= gt.gettext("Recalbox Manager") %></a>
-          <ul class="navbar-brand list-inline locale-switcher">
-            <li><a href="<%= currentUrl %>/?locale=fr-FR"><img src="/img/flag-fr.png" alt="Français" /></a></li>
-            <li><a href="<%= currentUrl %>/?locale=en-US"><img src="/img/flag-us.png" alt="English" /></a></li>
-          </ul>
+
+          <div class="dropdown pull-left locale-switcher">
+            <button class="dropdown-toggle btn btn-link" type="button" id="localeSelection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <img src="/img/flag-<%= currentLocale.replace('-', '_') %>.png" alt="<%= currentLocale %>" />
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" style="min-width: 0px;" aria-labelledby="localeSelection">
+            <% supportedLocales.map((locale) => { %>
+              <li><a href="<%= currentUrl %>/?locale=<%= locale.replace('_', '-') %>"><img src="/img/flag-<%= locale %>.png" alt="<%= locale %>" /></a></li>
+            <% }); %>
+            </ul>
+          </div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
