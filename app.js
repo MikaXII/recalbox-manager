@@ -48,7 +48,7 @@ render(app, {
 
 app.use(function *(next) {
   // Switch locale
-  let managerLocale = 'en-US';
+  let managerLocale;
   let localeQuery = this.request.getLocaleFromQuery();
 
   if (localeQuery) {
@@ -62,6 +62,8 @@ app.use(function *(next) {
       managerLocale = this.request.getLocaleFromHeader();
     }
   }
+
+  managerLocale = managerLocale || 'en-US';
 
   this.cookies.set('locale', managerLocale);
 
